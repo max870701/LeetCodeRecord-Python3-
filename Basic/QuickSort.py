@@ -8,13 +8,14 @@ def partition(li, left, right):
             left += 1
         li[right] = li[left] # Assign the left side value to right side position
     li[left] = tmp
+    return left
 
-    li[left] = tmp    
- 
-
-
-
-
-
+def quick_sort(data, left, right):
+    if left < right:
+        mid  = partition(data, left, right)
+        quick_sort(data, left, mid - 1)
+        quick_sort(data, mid + 1, right)
 
 l = [7, 5, 4, 6, 3, 8, 2, 9, 1]
+quick_sort(l, 0 , len(l)-1)
+print(l)
