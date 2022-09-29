@@ -11,4 +11,6 @@
 - 27 Remove Element
 > two pointer (reader and writer both start at 0 position)/ in-place sorting/ rarely remove method (swap)(One pointer starts at 0 position, another pointer starts at the last position)
 - 179 Largest Number
-> override the comparator/ built-in sort fuction/ string comparator (a="400", b="5", which string is bigger?)(Only compare two strings' 1st char)
+> override the comparator/ built-in sort fuction/ string comparator (a="400", b="5", compare a+b, b+a)
+-75 Sort Colors
+> 3 pointers(current position, left boundry position, right boundry position)
