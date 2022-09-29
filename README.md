@@ -14,3 +14,7 @@
 > override the comparator/ built-in sort fuction/ string comparator (a="400", b="5", compare a+b, b+a)
 -75 Sort Colors
 > 3 pointers(current position, left boundry position, right boundry position)
+-4 Median Of Two Sorted Arrays
+> The time complexity should be O(log(m+n))
+-206 Reverse Linked List
+> Iteration(3 Pointer)/ Recursion(head.next pointer & head.next.next pointer)/ Linked List Pointer Re-assign/ Avoid a cycle 
