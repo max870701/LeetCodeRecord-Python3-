@@ -37,6 +37,7 @@ class Solution(object):
         # In order to avoid a cycle
         head.next = None
 
+        # Return the last element
         return reverse_sub
 
 
