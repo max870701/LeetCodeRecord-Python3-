@@ -17,4 +17,6 @@
 -4 Median Of Two Sorted Arrays
 > The time complexity should be O(log(m+n))
 -206 Reverse Linked List
-> Iteration(3 Pointer)/ Recursion(head.next pointer & head.next.next pointer)/ Linked List Pointer Re-assign/ Avoid a cycle 
+> Iteration(3 Pointer)/ Recursion(head.next pointer & head.next.next pointer)/ Linked List Pointer Re-assign/ Avoid a cycle
+-160 Get Intersection Node
+> Approach 1: Hash set (Time complexity is O(M+N) and Space complexity is O(M))/ Approach 2: Two Pointer (Time complexity is O(M+N) and Space complexity is O(1)). The concept is path(A) + path(B) == path(B) + path(A)
