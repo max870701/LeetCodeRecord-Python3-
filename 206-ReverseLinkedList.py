@@ -30,6 +30,7 @@ class Solution(object):
             return head # ListNode(val=head.val, next=None)
         
         # Recursively Call reverseList
+        # reverse_sub will 
         reverse_sub = self.reverseList1(head=head.next)
         # Assign the next pointer of head.next to head
         head.next.next = head
@@ -37,7 +38,8 @@ class Solution(object):
         # In order to avoid a cycle
         head.next = None
 
-        # Return the last element
+        # The reverse_sub will refer to
+        # the head of the new reverse sub ListNode
         return reverse_sub
 
 
