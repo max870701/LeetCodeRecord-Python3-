@@ -40,3 +40,6 @@
 - 1 Two Sum
 > Approach 1: One-pass Hash Table (Time O(n), Space O(n))
 > Approach 2: Two-pass Hash Table (Time O(n), Space O(n))
+- 128 Longest Consecutive Sequence
+> Approach 1: Sorting the input first (Time O(nlogn), Space O(1))
+> Approach 2: HashSet and Intelligent Sequence Building (Time O(n), Space O(n))
