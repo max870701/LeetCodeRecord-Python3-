@@ -12,6 +12,7 @@
 > two pointer (reader and writer both start at 0 position)/ in-place sorting/ rarely remove method (swap)(One pointer starts at 0 position, another pointer starts at the last position)
 - 179 Largest Number
 > override the comparator/ built-in sort fuction/ string comparator (a="400", b="5", compare a+b, b+a)
+## Linked List
 - 75 Sort Colors
 > 3 pointers(current position, left boundry position, right boundry position)
 - 4 Median Of Two Sorted Arrays
@@ -30,10 +31,12 @@
 - 92 Reverse Linked List II
 > Approach 1: Recursion
 > Approach 2: Iterative Link Reversal
+## Stack
 - 155 Min Stack
 > Approach 1: Stack of (value, minimum)
 > Approach 2: Two Stacks (One for value, another for minimum)
 > Approach 3: Improved Two Stacks (One for value, another for (minimum, times))
+## Hashmap/ Hashset
 - 1 Two Sum
 > Approach 1: One-pass Hash Table (Time O(n), Space O(n))
 > Approach 2: Two-pass Hash Table (Time O(n), Space O(n))
