@@ -44,4 +44,5 @@
 > Approach 1: Sorting the input first (Time O(nlogn), Space O(1))
 > Approach 2: HashSet and Intelligent Sequence Building (Time O(n), Space O(n))
 - 73 Set Matrix Zeros
-> Hash Set
+> Approach 1: Hash Set
+> Approach 2: Hash Map + Array List
