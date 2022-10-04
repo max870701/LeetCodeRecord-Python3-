@@ -27,10 +27,13 @@
 - 142 Linked List Cycle II
 > Approach 1: Hash set
 > Approach 2: Floyd's Tortoise and Hare
+- 92 Reverse Linked List II
+> Approach 1: Recursion
+> Approach 2: Iterative Link Reversal
 - 155 Min Stack
 > Approach 1: Stack of (value, minimum)
 > Approach 2: Two Stacks (One for value, another for minimum)
 > Approach 3: Improved Two Stacks (One for value, another for (minimum, times))
-- 92 Reverse Linked List II
-> Approach 1: Recursion
-> Approach 2: Iterative Link Reversal
+- 1 Two Sum
+> Approach 1: One-pass Hash Table (Time O(n), Space O(n))
+> Approach 2: Two-pass Hash Table (Time O(n), Space O(n))
