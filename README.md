@@ -43,3 +43,5 @@
 - 128 Longest Consecutive Sequence
 > Approach 1: Sorting the input first (Time O(nlogn), Space O(1))
 > Approach 2: HashSet and Intelligent Sequence Building (Time O(n), Space O(n))
+- 73 Set Matrix Zeros
+> Hash Set
