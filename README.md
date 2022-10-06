@@ -46,3 +46,5 @@
 - 73 Set Matrix Zeros
 > Approach 1: Hash Set
 > Approach 2: Hash Map + Array List
+- 49 Group Anagrams
+> collections.defaultdict(list)
