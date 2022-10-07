@@ -47,4 +47,4 @@
 > Approach 1: Hash Set
 > Approach 2: Hash Map + Array List
 - 49 Group Anagrams
-> collections.defaultdict(list)
+> collections.defaultdict(list)/ empty list to count the number of alphabet in a string/ Typ tuple/ ord() built-in function
