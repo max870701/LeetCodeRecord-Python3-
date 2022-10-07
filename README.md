@@ -21,7 +21,8 @@
 > Iteration(3 Pointer)/\ Recursion(head.next pointer & head.next.next pointer)/ Linked List Pointer Re-assign/ Avoid a cycle
 - 160 Get Intersection Node
 > Approach 1: Hash set (Time complexity is O(M+N) and Space complexity is O(M))\
-> Approach 2: Two Pointer (Time complexity is O(M+N) and Space complexity is O(1)). The concept is path(A) + path(B) == path(B) + path(A)
+> Approach 2: Two Pointer (Time complexity is O(M+N) and Space complexity is O(1)).\
+> The concept is path(A) + path(B) == path(B) + path(A)
 - 141 Linked List Cycle
 > Approach 1: Hash set\
 > Approach 2: The fast and slow pointer
@@ -47,7 +48,9 @@
 > Approach 1: Hash Set\
 > Approach 2: Hash Map + Array List
 - 49 Group Anagrams
-> collections.defaultdict(list)/\ empty list to count the number of alphabet in a string/ Typ tuple/ ord() built-in function
+> collections.defaultdict(list)/\
+> empty list to count the number of alphabet in a string/ Typ tuple/\
+> ord() built-in function
 - 350 Intersection of Two Arrays II
 > Approach 1: Hash Map by collections.defaultdict\
 > Approach 2: Sort(Order List) + Two pointer(If the value in a list is smaller thant another, then increment its index)
