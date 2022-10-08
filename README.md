@@ -54,3 +54,6 @@
 - 350 Intersection of Two Arrays II
 > Approach 1: Hash Map by collections.defaultdict\
 > Approach 2: Sort(Order List) + Two pointer(If the value in a list is smaller thant another, then increment its index)
+- 299 Bulls and Cows
+> Approach 1: Two passes hash map\
+> Approach 2: One pass hash map (optimize approach 1)
