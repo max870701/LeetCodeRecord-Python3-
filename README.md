@@ -57,3 +57,6 @@
 - 299 Bulls and Cows
 > Approach 1: Two passes hash map\
 > Approach 2: One pass hash map (optimize approach 1)
+## Two Pointer
+- 167 Two Sum II
+> Two pointer start at the first and the end of the numbers list
