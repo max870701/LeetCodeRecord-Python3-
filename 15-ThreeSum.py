@@ -42,3 +42,20 @@ class Solution(object):
                     j += 1
             hashset.add(nums[j])
             j += 1
+
+    def threeSum1(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res, dups = set(), set()
+        seen = {}
+        for i, val in enumerate(nums):
+            if val not in dups:
+                dups.add(val)
+                for j, val2 in enumerate(nums[i+1:]):
+                    complement = -val - val2
+                    if complement in seen and seen[complement] == i:
+                        res.add(tuple(sorted((val, val2, complement))))
+                    seen[val2] = i
+        return res
