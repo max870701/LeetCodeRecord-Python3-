@@ -60,3 +60,6 @@
 ## Two Pointer
 - 167 Two Sum II
 > Two pointer start at the first and the end of the numbers list
+## Dynamic Programming
+- 221 Maximal Square
+> Dynamic Programming
