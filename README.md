@@ -58,10 +58,18 @@
 > Approach 1: Two passes hash map\
 > Approach 2: One pass hash map (optimize approach 1)
 - 348 Design Tic-Tac-Toe
-> Approach: Hashmap(collection.defaultdict()), flag
+> Approach: Hashmap(collection.defaultdict(type)), flag
 ## Two Pointer
 - 167 Two Sum II
 > Two pointer start at the first and the end of the numbers list
 ## Dynamic Programming
 - 221 Maximal Square
-> Dynamic Programming
+> Dynamic Programming/ Find state-transition matrix
+## Online Assessment
+- 945 Minimum Increment to Make Array Unique
+> Approach 1: collection.Counter(type)/ list extend method\
+> Approach 2:
+- 62 Unique Paths
+> Approach 1: Recursion (Time Limit Exceeded in testcase) \
+> Approach 2: Dynamic Programming (Build a matrix to count steps) \
+> Approach 3: Simplify to a classic combinatorial problem (Use math.factorial)
