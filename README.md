@@ -67,8 +67,8 @@
 > Dynamic Programming/ Find state-transition matrix
 ## Online Assessment
 - 945 Minimum Increment to Make Array Unique
-> Approach 1: collection.Counter(type)/ list extend method\
-> Approach 2:
+> Approach 1: collection.Counter(type)/ list extend(), pop()\
+> Approach 2: built-in sort() and directly count the increment
 - 62 Unique Paths
 > Approach 1: Recursion (Time Limit Exceeded in testcase) \
 > Approach 2: Dynamic Programming (Build a matrix to count steps) \
