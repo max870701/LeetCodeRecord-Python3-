@@ -73,3 +73,7 @@
 > Approach 1: Recursion (Time Limit Exceeded in testcase) \
 > Approach 2: Dynamic Programming (Build a matrix to count steps) \
 > Approach 3: Simplify to a classic combinatorial problem (Use math.factorial)
+- 323 Number of Connected Components in an Undirected Graph
+> Approach 1: DFS \
+> Approach 2: BFS \
+> Approach 3: Disjoint-set Union
