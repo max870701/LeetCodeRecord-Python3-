@@ -13,6 +13,7 @@ def BFS(graph, s):
     queue.append(s)
     seen = set()
     seen.add(s)
+    parent = {s: None}
 
     while (len(queue) > 0):
         vertex = queue.pop(0) # pop the first element
@@ -21,7 +22,19 @@ def BFS(graph, s):
             if w not in seen:
                 queue.append(w) # add to the last position
                 seen.add(w)
-        print(vertex)
+                parent[w] = vertex
+        #print(vertex)
+    
+    return parent
 
 if __name__ == "__main__":
-    BFS(graph, "A")
+    parent = BFS(graph, "E")
+    #for key in parent:
+    #    print(key, parent[key])
+    v = "B"
+    count = 0
+    while v:
+        print(v)
+        v = parent[v]
+        count += 1
+    print("The shortest steps is {}".format(count))
