@@ -37,6 +37,8 @@
 > Approach 1: Stack of (value, minimum)\
 > Approach 2: Two Stacks (One for value, another for minimum)\
 > Approach 3: Improved Two Stacks (One for value, another for (minimum, times))
+- 232 Implement Queue Using Stacks
+> Only can use stack with push to top, peek/pop from top, size, and is empty operations are valid.
 ## Hashmap/ Hashset
 - 1 Two Sum
 > Approach 1: One-pass Hash Table (Time O(n), Space O(n))\
