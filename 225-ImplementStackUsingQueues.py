@@ -27,7 +27,7 @@ class MyStack(object):
     
     def empty(self):
         """
-        :rtyp e: bool
+        :rtyp e: bool\
         """
         return not len(self._queue)
 
