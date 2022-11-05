@@ -9,6 +9,6 @@ def bubble_sort(li):
         if not exchange:
             return
 
-l = [7, 5, 4, 6, 3, 8, 2, 9, 1]
+l = [4, 23, 8, 42, 15, 16]
 bubble_sort(li=l)
 print(l)
