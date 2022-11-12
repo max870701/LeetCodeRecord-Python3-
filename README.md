@@ -9,11 +9,19 @@
 - 56 Merge Intervals
 > python built-in function(sort, max, min)/ an initial list/ define merge rules(when and which values) 
 - 27 Remove Element
-> two pointer (reader and writer both start at 0 position)/\ in-place sorting/\ rarely remove method (swap)(One pointer starts at 0 position, another pointer starts at the last position)
+> two pointer (reader and writer both start at 0 position)/\
+> in-place sorting/\
+> rarely remove method (swap)(One pointer starts at 0 position, another pointer starts at the last position)/\
+> The fast and slow pointer
 - 179 Largest Number
 > override the comparator/\ built-in sort fuction/\ string comparator (a="400", b="5", compare a+b, b+a)
 - 26 Remove Duplicates from Sorted Array
 > The fast and slow pointer
+- 83 Remove Duplicates from Sorted List
+> The fast and slow pointer
+- 283 Remove Zeros
+> Use the solution in 83.\
+> And then set the rest of element in the input array to zeros.
 ## Linked List
 - 75 Sort Colors
 > 3 pointers(current position, left boundry position, right boundry position)
