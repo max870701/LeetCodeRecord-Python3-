@@ -7,7 +7,7 @@ class NumMatrix(object):
         m, n = len(matrix), len(matrix[0])
         if m == 0 or n == 0: return
         # preSum matrix (m+1) * (n+1)
-        self.preSum = [[0] * (n+1) for i in range(m+1)]
+        self.preSum = [[0] * (n+1) for _ in range(m+1)]
         #self.preSum = [[0] * (n+1)] * (m+1) There is an issue in shallow copy in Python
         for row in range(1, m + 1):
             for col in range(1, n + 1):
