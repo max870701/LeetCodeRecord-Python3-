@@ -4,7 +4,8 @@ class ListNode(object):
         self.val = val
         self.next = next
 class Solution(object):
-    def reverseList(self, head): # space complexity O(1)
+    def reverseList(self, head):
+        # space complexity O(1)
         """
         :type head: ListNode
         :rtype: ListNode
@@ -23,7 +24,9 @@ class Solution(object):
 
         return prev_node
 
-    def reverseList1(self, head): # fastest, but the space complexity is O(n)
+    def reverseList1(self, head):
+        # fastest, but the space complexity is O(n)
+        # 定义：输入一个单链表头结点，将该链表反转，返回新的头结点
         if head is None: #if input is a empty list
             return head
         if head.next is None: # End condition
