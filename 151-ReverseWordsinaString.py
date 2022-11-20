@@ -14,6 +14,7 @@ class Solution(object):
         return res.rstrip()
     
     def reverseWord(self, s):
+        # Equivalent s[::-1]
         tmp = ""
         for i in range(len(s) - 1, -1, -1):
             tmp += s[i]
