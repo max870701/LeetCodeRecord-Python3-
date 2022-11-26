@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution(object):
-    # 定義：輸入跟節點，返回這顆樹的最大深度
+    # 定義：輸入根節點，返回這顆樹的最大深度
     def maxDepth(self, root):
         """
         :type root: TreeNode
@@ -14,6 +14,8 @@ class Solution(object):
         if root is None:
             return 0
         else: 
+            # 分別計算左右子樹的最大深度
             leftHeight = self.maxDepth(root.left)
             rightHeight = self.maxDepth(root.right)
+            # 取左右子樹中的最大值，再加上跟節點本身
             return max(leftHeight, rightHeight) + 1
