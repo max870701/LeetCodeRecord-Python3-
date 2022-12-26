@@ -6,7 +6,10 @@ class Solution(object):
         """
         res = []
         nums.sort()
+        # nums = [-4, -1, -1, 0, 1, 2]
         for i in range(len(nums)):
+            # nums[i] 數字大於0，跳出for loop
+            # 因為三數之和要為0，第一個數字必須小於等於0
             if nums[i] > 0:
                 break
             if i == 0 or nums[i-1] != nums[i]:
@@ -30,6 +33,8 @@ class Solution(object):
                 hi -= 1
                 while lo < hi and nums[lo] == nums[lo-1]:
                     lo += 1
+                while lo < hi and nums[hi] == nums[hi+1]:
+                    hi -= 1
 
     def twoSum2(self, nums, i, res):
         hashset = set()
