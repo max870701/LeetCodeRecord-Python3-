@@ -64,3 +64,48 @@ class Solution(object):
                         res.add(tuple(sorted((val, val2, complement))))
                     seen[val2] = i
         return res
+
+    def threeSum3(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        res = []
+        l = len(nums)
+        i = 0
+        while i < l:
+            tuples = self.twoSum3(nums, i+1, 0 - nums[i])
+            for t in tuples:
+                res.append([nums[i]] + t)
+            while i < l-1 and nums[i] == nums[i+1]:
+                i += 1
+            i += 1
+        return res
+
+
+    def twoSum3(self, nums, start,  target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        res = []
+        left, right = start, len(nums) - 1
+        
+        while left < right:
+            sum_num = nums[left] + nums[right]
+            left_num, right_num = nums[left], nums[right]
+            if sum_num < target:
+                while (left < right) and (nums[left] == left_num):
+                    left += 1
+            elif sum_num > target:
+                while (left < right) and (nums[right] == right_num):
+                    right -= 1
+            else: # sum_num == target
+                res.append([left_num, right_num])
+                while (left < right) and (nums[left] == left_num):
+                    left += 1
+                while (left < right) and (nums[right] == right_num):
+                    right -= 1
+        return res
