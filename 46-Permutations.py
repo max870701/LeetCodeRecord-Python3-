@@ -41,7 +41,7 @@ class Solution(object):
         self.backtrack(nums)
         return self.res
     
-    def backtrack1self, nums):
+    def backtrack1(self, nums):
         """
         :type nums: List[int]
         :type track: 
