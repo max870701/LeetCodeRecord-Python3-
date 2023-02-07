@@ -11,6 +11,7 @@ class Solution(object):
         :rtype: int
         """
         # Time Complexity: O(logN * logN)
+        # In subtrees of a complete binary tree, at least one of them is a perfect binary tree.
         l, r = root, root
         # 沿最左側和最右側分別計算高度
         hl, hr = 0, 0
