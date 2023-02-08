@@ -47,3 +47,50 @@ class Solution(object):
         # 後序
         self.postorder.append(s)
         self.onPath[s] = False
+
+from Queue import Queue
+class Solution(object):
+    def buildGraph(self, numCourses, prerequisites):
+        # 圖中共有 numCourses 個節點
+        # 構建鄰接表
+        graph = [[] for _ in range(numCourses)]
+        for edge in prerequisites:
+            # 添加一條從 from 指向 to 的有向邊
+            # 邊的方向是「被依賴」關係，即修完課程 from 才能修 to
+            # [ai, bi] 先修 bi 才修 ai
+            fr, to = edge[1], edge[0]
+            graph[fr].append(to)
+        return graph
+
+    def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        # BFS 解法
+        # 構建圖，有向邊代表「被依賴」關係
+        graph = self.buildGraph(numCourses, prerequisites)
+        indegree = [0 for _ in range(numCourses)]
+        for edge in prerequisites:
+            fr, to = edge[1], edge[0]
+            indegree[to] += 1
+        
+        q = Queue()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                q.put(i)
+        
+        res = [0 for _ in range(numCourses)]
+        count = 0
+        while not q.empty():
+            cur = q.get()
+            res[count] = cur
+            count += 1
+            for next in graph[cur]:
+                indegree[next] -= 1
+                if indegree[next] == 0:
+                    q.put(next)
+        if count != numCourses:
+            return []
+        return res    
