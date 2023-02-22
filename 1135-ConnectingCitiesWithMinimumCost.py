@@ -47,3 +47,76 @@ class UF(object):
     
     def connected(self, p, q):
         return self.find(p) == self.find(q)
+    
+
+import heapq
+class Solution(object):
+    def minimumCost(self, n, connections):
+        """
+        :type n: int
+        :type connections: List[List[int]]
+        :rtype: int
+        """
+        graph = self.buildGraph(n, connections)
+        prim = Prim(graph)
+        
+        if not prim.allConnected():
+            return -1
+        return prim.weightSum
+    
+    def buildGraph(self, n, connections):
+        # 圖中有 n 個節點，創建鄰接表
+        graph = [[] for _ in range(n)]
+        for edge in connections:
+            # 題目編號為 1，做偏移
+            u, v = edge[0] - 1, edge[1] - 1
+            weight = edge[2]
+            # 無向圖就是雙向圖
+            graph[u].append((u, v, weight))
+            graph[v].append((v, u, weight))
+        return graph
+
+class Prim(object):
+    def __init__(self, graph):
+        self.graph = graph
+        n = len(graph)
+        self.pq = []
+        # Visited 數組功用
+        self.inMST = [False for _ in range(n)]
+        self.weightSum = 0
+        # 隨便從一個節點開始分割，不妨從節點 0 開始
+        self.inMST[0] = True
+        self.cut(0)
+        # 不斷進行分割，向最小生成樹中添加邊
+        while self.pq:
+            edge = heapq.heappop(self.pq)
+            # 形式 (priority_order, (node1, node2, weight))
+            to = edge[1][1]
+            weight = edge[1][2]
+            # 節點 to 已經在最小生成樹中，則跳過
+            # 避免產生 Cycle
+            if self.inMST[to]:
+                continue
+            # 將 edge 加入最小生成樹
+            self.weightSum += weight
+            self.inMST[to] = True
+            self.cut(to)
+    
+    def cut(self, s):
+        # 遍歷 s 的鄰邊
+        for edge in self.graph[s]:
+            # edge的終點
+            to = edge[1]
+            # 若相鄰接點 to 已經在最小生成樹中，跳過
+            if self.inMST[to]:
+                continue
+            # 不在最小生成樹中，則加入優先級隊列(照權重)
+            # heapq.heappush(heap, (priority order, value))
+            heapq.heappush(self.pq, (edge[2], edge))
+
+    def allConnected(self):
+        # 判斷最小生成樹是否包含圖中所有節點
+        for i in range(len(self.inMST)):
+            if not self.inMST[i]:
+                return False
+        return True
