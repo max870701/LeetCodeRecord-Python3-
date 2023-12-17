@@ -1,18 +1,15 @@
-def insert_sort(li):
-    for i in range(1, len(li)): # the index of hand card we pick (unsorted area)
-        temp = li[i]
-        # the maximum index of hand card we have (Right Side in sorted area)
-        j = i - 1
-        while li[j] > temp and j >= 0:
-            li[j+1] = li[j] 
-            j -= 1
-        
-        # if j < 0 OR
-        # if li[j] < temp
-        li[j+1] = temp
-        print(li)
+def insertSort(list):
+    l = len(list)
+    if l is None or l < 2: return list
+    # 0 ~ 0, 1
+    # 0 ~ 1, 2
+    # ...
+    # 0 ~ n-2, n-1
+    for i in range(1, l):
+        for j in range(i-1, -1, -1):
+            if list[j+1] < list[j]:
+                swap(list, j, j+1)
+    return list
 
-l = [7, 5, 4, 6, 3, 8, 2, 9, 1]
-print(l)
-insert_sort(l)
-#print(l)
+def swap(list, i, j):
+    list[i], list[j] = list[j], list[i]

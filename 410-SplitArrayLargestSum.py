@@ -1,4 +1,31 @@
-class Solution(object):
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        left, right = 0, sum(nums)
+        ans = 0
+        while left <= right:
+            mid = left + ((right - left) >> 1)
+            if self.f(nums, mid) <= k:
+                ans = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+        return ans
+    
+    def f(self, nums, limit):
+        parts = 1
+        tmp_sum = 0
+        for num in nums:
+            if num > limit:
+                return float('inf')
+            if (tmp_sum + num > limit):
+                parts += 1
+                tmp_sum = num
+            else:
+                tmp_sum += num
+        return parts
+    
+    
+class Solution2(object):
     def splitArray(self, nums, k):
         """
         :type nums: List[int]

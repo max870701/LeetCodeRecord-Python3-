@@ -1,24 +1,15 @@
-def select_sort_simple(li):
-    li_new = [] # it will double the memory
-    for i in range(len(li)): # O(N)
-        min_val = min(li) # O(N)
-        li_new.append(min_val)
-        li.remove(min_val) # O(N)
-    return li_new
+def swap(list, i, j):
+    list[i], list[j] = list[j], list[i]
 
-def select_sort(li):
-    for i in range(len(li) - 1): # i round
-        min_loc = i
-        for j in range(i+1, len(li)):
-            if li[j] < li[min_loc]:
-                min_loc = j
-        li[i], li[min_loc] = li[min_loc], li[i]
-        print(li)
-
-
-
-
-li = [3, 2, 4, 1, 5, 6, 8, 7, 9]
-print(li)
-#print(select_sort_simple(li))
-select_sort(li)
+def selectSort(list):
+    l = len(list)
+    if list is None or l < 2:return list
+    # 0 ~ n-1
+    # 1 ~ n-1
+    for i in range(l-1): # 設置當前 index 為最小值的index
+        minIndex = i
+        for j in range(i+1, l): # j 從 i+1 開始，到 l-1 最後一項結束
+            if (list[j] < list[minIndex]):
+                minIndex = j # 更新最小值 index
+        swap(list, i, minIndex)
+    return list

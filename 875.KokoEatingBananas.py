@@ -5,28 +5,22 @@ class Solution(object):
         :type h: int
         :rtype: int
         """
-        left = 1
-        right = 1000000000 + 1
-
-        while left < right:
-            mid = (left + right) / 2
-            print(self.f(piles, mid))
-            if (self.f(piles, mid) == h):
-                right = mid
-            elif (self.f(piles, mid) < h):
-                # let f(x) bigger, it means let x smaller
-                right = mid
-            elif (self.f(piles, mid) > h):
-                # let f(x) smaller, it means let x bigger
+        left, right = 1, max(piles) # 所需檢視的速度範圍
+        ans = 0
+        while left <= right:
+            mid = left + ((right - left) >> 1)
+            if self.f(piles, mid) <= h:
+                ans = mid
+                right = mid - 1
+            else:
                 left = mid + 1
-        return left
 
-    def f(self, piles, x):
-        hours = 0
-        for i in range(len(piles)):
-            hours += piles[i] / x
-            if piles[i] % x > 0:
-                hours += 1
-        return hours
+        return ans
 
+    def f(self, piles, speed):
+        time = 0
+        for pile in piles:
+            # 每堆的時間為 pile / speed 向上取整
+            time += (pile + speed - 1) // speed
+        return time
     

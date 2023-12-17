@@ -1,14 +1,15 @@
-def bubble_sort(li):
-    for i in range(len(li) - 1): # i round
-        exchange = False
-        for j in range(len(li) - i - 1): # unsorted list
-            if li[j] > li[j+1]:
-                li[j], li[j+1] = li[j+1], li[j]
-                exchange = True
+def swap(list, i, j):
+    list[i], list[j] = list[j], list[i]
 
-        if not exchange:
-            return
-
-l = [4, 23, 8, 42, 15, 16]
-bubble_sort(li=l)
-print(l)
+def bubbleSort(list):
+    l = len(list)
+    if list is None or l < 2: return list
+    # 0 ~ n-1
+    # 0 ~ n-2
+    # 0 ~ end--
+    # 0 ~ 1
+    for end in range(l-1, 0, -1): # 範圍從長到短
+        for i in range(end): # i 跟 i+1 去比
+            if list[i] > list[i+1]:
+                swap(list, i, i+1)
+    return list
