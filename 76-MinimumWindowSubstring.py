@@ -39,4 +39,36 @@ class Solution(object):
                     window[d] -= 1
 
         return "" if (length == sys.maxint) else s[start:start+length]
-            
+
+class Solution2:
+    def minWindow(self, s: str, t: str) -> str:
+        if len(t) > len(s) or len(t) == 0:
+            return ""
+        s_ascii = [ord(c) for c in s]
+        cnt = [0] * 128
+        for c in t:
+            cnt[ord(c)] -= 1
+        # min_len 用於記錄最小覆蓋子串的長度
+        min_len = float('inf')
+        # start 用於記錄最小覆蓋子串的起始位置
+        start = 0
+        # 總共欠的字串數量
+        debt = len(t)
+        # 左邊界
+        l = 0
+        for r in range(len(s_ascii)):
+            # 若此char在cnt中為所欠缺的char，則消去 debt -= 1
+            if cnt[s_ascii[r]] < 0:
+                debt -= 1
+            # cnt 中加上該 char
+            cnt[s_ascii[r]] += 1
+            # 當 debt 來到 0，開始縮小左邊界，並更新 min_len 和 start 的值
+            if debt == 0:
+                while cnt[s_ascii[l]] > 0:
+                    cnt[s_ascii[l]] -= 1
+                    l += 1
+                if (r - l + 1) < min_len:
+                    min_len = r - l + 1
+                    start = l
+
+        return "" if min_len == float('inf') else s[start:start+min_len]

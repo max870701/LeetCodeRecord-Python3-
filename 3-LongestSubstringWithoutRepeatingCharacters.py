@@ -25,3 +25,29 @@ class Solution(object):
             res = max(res, right - left)
 
         return res
+
+    
+class Solution2:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        s_ascii = [ord(c) for c in s]
+        s_last = [-1] * 128
+        ans = 0
+        l = 0
+        for r in range(len(s)):
+            l = max(l, s_last[s_ascii[r]] + 1)
+            ans = max(ans, r - l + 1)
+            s_last[s_ascii[r]] = r
+        return ans
+    
+class Solution3:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        s_ascii = [ord(c) for c in s]
+        s_last = [-1] * 128
+        ans = 0
+        l = 0
+        for r, c in enumerate(s_ascii):
+            l = max(l, s_last[c] + 1)
+            ans = max(ans, r - l + 1)
+            s_last[c] = r
+
+        return ans
