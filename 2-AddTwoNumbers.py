@@ -1,32 +1,29 @@
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 class Solution:
-    def sortNumbers(self, _n:int) -> ListNode:
-        d = str(_n)
-        for i in range(len(d)):
-            if i == 0:
-                node = ListNode(val=int(d[i]))
-            else:
-                node = ListNode(val=int(d[i]), next=node)
-                
-        return node
-    
-    def reDigital(self, _node:ListNode) -> int:
-        temp = 0
-        
-        for t in range(1, 101):
-            if _node == None:return temp
-            temp += _node.val * pow(10, t-1)
-            _node = _node.next
-            
-    
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        number_1 = self.reDigital(l1)
-        number_2 = self.reDigital(l2)
-        total = number_1 + number_2
+        ans, cur = None, None
+        carry = 0
+        while l1 or l2:
+            s = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
+            val = s % 10
+            carry = s // 10
+            
+            if ans is None:
+                ans = ListNode(val=val)
+                cur = ans
+            else:
+                cur.next = ListNode(val=val)
+                cur = cur.next
+
+            l1 = None if l1 is None else l1.next
+            l2 = None if l2 is None else l2.next
+
+        if carry == 1:
+            cur.next = ListNode(val=1)
         
-        return self.sortNumbers(_n=total)
-        
+        return ans

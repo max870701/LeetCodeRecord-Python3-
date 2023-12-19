@@ -1,32 +1,23 @@
 # Definition for singly-linked list.
-# class ListNode(object):
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def partition(self, head, x):
-        """
-        :type head: ListNode
-        :type x: int
-        :rtype: ListNode
-        """
-        p1 = dummy1 = ListNode(-1)
-        p2 = dummy2 = ListNode(-1)
-        p = head
-        while p is not None:
-            # sub-NodeList 1
-            if p.val < x:
-                p1.next = p
-                p1 = p1.next
-            # sub-NodeList 2
-            else: # p.val >= x
-                p2.next = p
-                p2 = p2.next
-            # To avoid cycle in the ListNode
-            tmp = p.next
-            p.next = None
-            p = tmp
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        # ln1, ln2
+        head1, head2 = ListNode(-1), ListNode(-1)
+        ln1, ln2 = head1, head2
+
+        while head:
+            if head.val < x:
+                ln1.next = ListNode(head.val)
+                ln1 = ln1.next
+            else:
+                ln2.next = ListNode(head.val)
+                ln2 = ln2.next
+            head = head.next
         
-        p1.next = dummy2.next
-        
-        return dummy1.next
+        ln1.next = head2.next
+
+        return head1.next

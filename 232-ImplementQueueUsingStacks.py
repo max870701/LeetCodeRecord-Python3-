@@ -1,39 +1,32 @@
-class MyQueue(object):
+class MyQueue:
 
     def __init__(self):
-        self.in_stack = []
-        self.out_stack = []
-        
-    def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
-        self.in_stack.append(x)
-        
+        self.inStack = []
+        self.outStack = []
 
-    def pop(self):
-        """
-        :rtype: int
-        """
-        self.peek()
-        return self.out_stack.pop()
-        
+    def push(self, x: int) -> None:
+        self.inStack.append(x)
+        self.inToOut()
 
-    def peek(self):
-        """
-        :rtype: int
-        """
-        if not self.out_stack:
-            while self.in_stack:
-                self.out_stack.append(self.in_stack.pop())
-        return self.out_stack[-1]
+    def pop(self) -> int:
+        self.inToOut()
+        return self.outStack.pop()
 
-    def empty(self):
-        """
-        :rtype: bool
-        """
-        return not self.in_stack and not self.out_stack
+    def peek(self) -> int:
+        self.inToOut()
+        return self.outStack[-1]
+
+    def empty(self) -> bool:
+        return (not self.inStack) and (not self.outStack)
+    
+    # 倒數據
+    # inStack -> outStack
+    # 1) 只有在 outStack 為空時才倒
+    # 2) 若倒數據，需一次倒完 inStack 所有元素
+    def inToOut(self):
+        if not self.outStack:
+            while self.inStack:
+                self.outStack.append(self.inStack.pop())
 
 
 # Your MyQueue object will be instantiated and called as such:

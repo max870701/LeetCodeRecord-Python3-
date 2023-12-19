@@ -24,27 +24,19 @@ class Solution(object):
 
         return prev_node
 
-    def reverseList1(self, head):
-        # fastest, but the space complexity is O(n)
-        # 定义：输入一个单链表头结点，将该链表反转，返回新的头结点
-        if head is None: #if input is a empty list
+    # 輸入一個節點head，將以head為起點的鏈表反轉，並返回反轉後的頭節點
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # Base case
+        if head is None or head.next is None:
             return head
-        if head.next is None: # End condition
-            return head # ListNode(val=head.val, next=None)
-        
-        # Recursively Call reverseList
-        # reverse_sub will 
-        reverse_sub = self.reverseList1(head=head.next)
-        # Assign the next pointer of head.next to head
+        # 拆解子問題，記錄 head.next 反轉後的頭節點
+        reversed_next_head = self.reverseList(head.next)
+        # 將當前 reversed_head 鏈表的尾端接回前面鏈表
         head.next.next = head
-        # And then assign the next pointer of head to None
-        # In order to avoid a cycle
+        # head.next 指向 None
         head.next = None
 
-        # The reverse_sub will refer to
-        # the head of the new reverse sub ListNode
-        return reverse_sub
-
+        return reversed_next_head 
 
     def reverseList2(self, head):
         tmp = None
