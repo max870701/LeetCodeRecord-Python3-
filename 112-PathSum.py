@@ -33,3 +33,15 @@ class Solution:
         self.curSum -= root.val
 
         return self.curSum
+    
+
+class Solution2:
+    # 給定 root 為根節點的二叉樹，判斷路徑和是否為 targetSum
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if root is None:
+            return False
+        
+        if root.left is None and root.right is None:
+            return root.val == targetSum
+        # 穿透性：若左側為 True 則直接返回 True，右側不會再進行判斷
+        return (self.hasPathSum(root.left, targetSum - root.val)) or (self.hasPathSum(root.right, targetSum - root.val))

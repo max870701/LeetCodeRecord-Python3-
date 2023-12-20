@@ -22,16 +22,16 @@ class Solution(object):
         self.flatten(root.right)
 
         # 1.左右子樹已經被拉平成一條鏈表
-        left = root.left
-        right = root.right
+        flatten_left = root.left
+        flatten_right = root.right
 
         # 2.左子樹作為右子樹
         root.left = None
-        root.right = left
+        root.right = flatten_left
 
         # 3.將原先的右子樹接到當前右子樹的末端
         p = root # root 現在為新的 root, 僅有新接上的右節點（舊的左節點）
         while p.right:
             p = p.right
         # 當 p.right is None 時跳出 while, 此時接上舊的右節點
-        p.right = right
+        p.right = flatten_right
