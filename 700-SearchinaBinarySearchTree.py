@@ -5,6 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution(object):
+    # 給定 root 為根節點的二叉樹，搜尋並返回以 val 為根節點的子樹
     def searchBST(self, root, val):
         """
         :type root: TreeNode

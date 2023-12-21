@@ -1,42 +1,44 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution(object):
-    def getMin(self, node):
-        # 最左元素為最小值
-        while node.left:
-            node = node.left
-        return node
+class Solution:
+    # 給定 root 為根節點的 BST，返回刪除 key 節點後的BST
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        if root is None: return None
 
-    def deleteNode(self, root, key):
-        """
-        :type root: TreeNode
-        :type key: int
-        :rtype: TreeNode
-        """
-        # base case
-        if root is None:
-            return None
         if root.val == key:
-            # 清況一 + 情況二
+            # 情況 1: root 為葉子節點
+            # 情況 2: root 為根節點且有 1 個子節點(左or右)
             if root.left is None:
                 return root.right
             if root.right is None:
                 return root.left
-            # 情況三
-            # 獲取右子樹最小節點
-            minNode = self.getMin(root.right)
-            # 用右子樹最小節點替換 root 節點
-            root.right = self.deleteNode(root.right, minNode.val)
-            # 構造以 minNode 做為根節點的樹
-            minNode.left = root.left
-            minNode.right = root.right
-            root = minNode
-        elif root.val < key:
-            root.right = self.deleteNode(root.right, key)
-        elif key < root.val:
+            # 情況 3: root 為根節點且有 2 個子節點(左and右)
+            new_root = self.getMin(root.right)
+            root.right = self.deleteNode(root.right, new_root.val)
+            new_root.left = root.left
+            new_root.right = root.right
+            root = new_root
+
+        elif root.val > key:
+            # 去左側子樹刪除完 key 後，將返回的 BST 接回 root.left
             root.left = self.deleteNode(root.left, key)
+        else: # root.val < key
+            # 去右側子樹刪除完 key 後，將返回的 BST 接回 root.right
+            root.right = self.deleteNode(root.right, key)
         return root
+           
+    # 獲取 node 為根節點的 BST 的最小值，返回該 node
+    def getMin(self, node):
+        while node.left:
+            node = node.left
+        return node
+
+    # 獲取 node 為根節點的 BST 的最大值，返回該 node
+    def getMax(self, node):
+        while node.right:
+            node = node.right
+        return node
