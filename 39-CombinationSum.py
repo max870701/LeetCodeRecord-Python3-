@@ -32,4 +32,30 @@ class Solution(object):
             # withdraw select
             self.tracksum -= nums[i]
             self.track.pop()
+
+
+class Solution2:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        self.n = len(candidates)
+        self.ans = []
+        self.track = []
+        self.target = target
+        self.curSum = 0
+        self.backtrack(candidates, 0)
+        return self.ans
+
+    def backtrack(self, nums, start):
+        if self.curSum == self.target:
+            self.ans.append(self.track[:])
+            return
         
+        if self.curSum > self.target:
+            return
+
+        for i in range(start, self.n):
+            self.track.append(nums[i])
+            self.curSum += nums[i]
+            self.backtrack(nums, i)
+            self.track.pop()
+            self.curSum -= nums[i]

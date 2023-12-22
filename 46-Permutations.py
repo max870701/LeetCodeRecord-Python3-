@@ -61,3 +61,28 @@ class Solution(object):
             self.backtrack(nums)
             # 取消選擇
             self.track.pop()
+
+class Solution2:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        self.ans = []
+        track = []
+        used = [False] * len(nums)
+        self.backtrack(nums, track, used)
+        return self.ans
+    
+    # 給定 nums，進行遍歷並且記錄，終止條件為到樹底
+    def backtrack(self, nums, track, used):
+        # 結束條件
+        if len(nums) == len(track):
+            self.ans.append(track[:])
+            return
+        # 遍歷開始
+        for i in range(len(nums)):
+            if used[i]: continue
+            # 前序記錄
+            track.append(nums[i])
+            used[i] = True
+            self.backtrack(nums, track, used)
+            # 後序維護
+            track.pop()
+            used[i] = False

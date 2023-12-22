@@ -20,3 +20,20 @@ class Solution(object):
             self.backtrack(nums, i+1)
             # 撤銷選擇
             self.track.pop()
+
+
+class Solution2:
+    def __init__(self):
+        self.ans = []
+        self.track = []
+
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        self.backtrack(nums)
+        return self.ans
+    
+    def backtrack(self, nums):
+        self.ans.append(self.track[:])
+        for i in range(len(nums)):
+            self.track.append(nums[i])
+            self.backtrack(nums[i+1:])
+            self.track.pop()
