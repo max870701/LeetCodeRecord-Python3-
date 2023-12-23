@@ -31,3 +31,18 @@ class Difference(object):
         for i in range(1, len(self.diff)):
             res += [res[i - 1] + self.diff[i]]
         return res
+
+
+class Solution2:
+    def corpFlightBookings(self, bookings: List[List[int]], n: int) -> List[int]:
+        cnt = [0] * (n+2)
+        # 構造差分數組
+        for book in bookings:
+            # [L, R] 範圍上加票
+            cnt[book[0]] += book[2]     # L   位置上加票數
+            cnt[book[1] + 1] -= book[2] # R+1 位置上減票數
+        # 計算前綴和
+        for i in range(1, n+1):
+            cnt[i] += cnt[i-1]
+        
+        return cnt[1:n+1]
