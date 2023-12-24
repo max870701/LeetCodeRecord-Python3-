@@ -12,6 +12,7 @@ class Solution:
             rest = target - nums[index]
             if rest in hash_map:
                 return [index, hash_map[rest]]
+            # hashmap.setdefault(nums[index], index)
             hash_map[nums[index]] = index
     
     def twoSum1(self, nums, target):
