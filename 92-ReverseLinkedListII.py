@@ -12,13 +12,13 @@ class Solution:
         if left == 1:
             return self.reverseN(head, right)
         # 區間距離恆為 right - left + 1
-        # 區間往前移動
+        # 區間往前移動，退階為base case
         head.next = self.reverseBetween(head.next, left-1, right-1)
         
         return head
         
 
-    # 返回反轉前 n 項的鏈表的頭節點
+    # 給定頭節點 head，返回反轉前 n 個節點的鏈表頭節點
     def reverseN(self, head, n):
         # 類似反轉整個單鏈表
         # Base case
