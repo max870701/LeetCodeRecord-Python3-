@@ -48,8 +48,8 @@ class Solution(object):
         self.postorder.append(s)
         self.onPath[s] = False
 
-from Queue import Queue
-class Solution(object):
+from queue import Queue
+class Solution2(object):
     def buildGraph(self, numCourses, prerequisites):
         # 圖中共有 numCourses 個節點
         # 構建鄰接表
@@ -94,3 +94,35 @@ class Solution(object):
         if count != numCourses:
             return []
         return res    
+    
+class Solution3:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        # 建圖（鄰接表、入度表）
+        graph = [[] for _ in range(numCourses)]
+        indegree = [0 for _ in range(numCourses)]
+        for edge in prerequisites:
+            from_node, to_node = edge[1], edge[0]
+            graph[from_node].append(to_node)
+            indegree[to_node] += 1
+        # 隊列
+        queue = list(range(numCourses))
+        l = 0
+        r = 0
+        # indegree 為 0 的 node 先入隊
+        for node in range(numCourses):
+            if indegree[node] == 0:
+                queue[r] = node
+                r += 1
+        # 刪除入度為 0 的點對其他點入度的影響
+        cnt = 0
+        while l < r:
+            cur_node = queue[l]
+            l += 1
+            cnt += 1
+            for neighbor in graph[cur_node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    queue[r] = neighbor
+                    r += 1
+        
+        return queue if cnt == numCourses else []
