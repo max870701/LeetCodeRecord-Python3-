@@ -120,3 +120,33 @@ class Prim(object):
             if not self.inMST[i]:
                 return False
         return True
+
+class Solution2:
+    def build(self, n):
+        self.father = [i for i in range(n+1)]
+    
+    def find(self, e):
+        if self.father[e] != e:
+            self.father[e] = self.find(self.father[e])
+        return self.father[e]
+    
+    def union(self, a, b):
+        a_f, b_f = self.find(a), self.find(b)
+        if a_f != b_f:
+            self.father[a_f] = b_f
+            return True
+        else:
+            return False
+
+    def minimumCost(self, n: int, connections: List[List[int]]) -> int:
+        self.build(n)
+        connections.sort(key=lambda x: x[2])
+        ans = 0
+        edgeCnt = 0
+        for edge in connections:
+            if self.union(edge[0], edge[1]):
+                edgeCnt += 1
+                ans += edge[2]
+            if edgeCnt == n-1: break
+        
+        return ans if edgeCnt == n-1 else -1

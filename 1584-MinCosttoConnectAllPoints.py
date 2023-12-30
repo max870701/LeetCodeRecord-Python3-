@@ -121,3 +121,46 @@ class Prim(object):
             if not self.inMST[i]:
                 return False
         return True
+    
+class Solution2:
+    def build(self, n):
+        self.father = [i for i in range(n)]
+    
+    def find(self, e):
+        if e != self.father[e]:
+            self.father[e] = self.find(self.father[e])
+        return self.father[e]
+    
+    def union(self, a, b):
+        a_f, b_f = self.find(a), self.find(b)
+        if a_f != b_f:
+            self.father[a_f] = b_f
+            return True
+        else:
+            return False
+
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        p_len = len(points)
+        self.build(p_len)
+        # 構建 edges
+        edges = []
+        for i in range(p_len):
+            for j in range(i+1, p_len):
+                xi, yi = points[i][0], points[i][1]
+                xj, yj = points[j][0], points[j][1]
+                edges.append([
+                    i,
+                    j,
+                    abs(xi - xj) + abs(yi - yj)
+                ])
+        # 依照權重排序
+        edges.sort(key=lambda x: x[2])
+        # 最小生成樹 Kruskal
+        ans = 0
+        edgeCnt = 0
+        for edge in edges:
+            if self.union(edge[0], edge[1]):
+                edgeCnt += 1
+                ans += edge[2]
+        
+        return ans

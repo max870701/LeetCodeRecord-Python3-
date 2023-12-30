@@ -37,3 +37,32 @@ class UF(object):
 
     def connected(self, p, q):
         return self.find(p) == self.find(q)
+    
+
+class Solution2:
+    def build(self, n):
+        self.father = [i for i in range(n)]
+        self.cnt = n
+
+    def find(self, e):
+        if e != self.father[e]:
+            self.father[e] = self.find(self.father[e])
+        return self.father[e]
+
+    def isSameSet(self, a, b):
+        return self.find(a) == self.find(b)
+    
+    def union(self, a, b):
+        a_f, b_f = self.find(a), self.find(b)
+        if a_f != b_f:
+            self.father[a_f] = b_f
+            self.cnt -= 1
+
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        self.build(n)
+        for edge in edges:
+            if self.isSameSet(edge[0], edge[1]): # 在相同集合中進行連通會形成環
+                return False
+            self.union(edge[0], edge[1])
+
+        return self.cnt == 1
