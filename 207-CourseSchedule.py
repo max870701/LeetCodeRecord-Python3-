@@ -95,3 +95,63 @@ class Solution:
         # 如果所有節點都被遍歷過，說明不成環
         return count == numCourses
 
+class Solution2:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        self.visited = [False] * numCourses
+        self.hasCycle = False
+        self.onPath = [False] * numCourses
+        # 建圖
+        self.graph = [[] for _ in range(numCourses)]
+        for edge in prerequisites:
+            self.graph[edge[1]].append(edge[0])
+        # dfs
+        for node in range(numCourses):
+            if not self.visited[node]:
+                self.dfs(node)
+
+        return not self.hasCycle
+    
+    def dfs(self, node):
+        if self.onPath[node]:
+            self.hasCycle = True
+        if self.hasCycle or self.visited[node]:
+            return
+    
+        self.visited[node] = True       
+        self.onPath[node] = True
+        for n_node in self.graph[node]:
+            self.dfs(n_node)
+        self.onPath[node] = False
+
+
+class Solution3:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # 建圖
+        # 入度表
+        graph = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        for edge in prerequisites:
+            from_course, to_course = edge[1], edge[0]
+            graph[from_course].append(to_course)
+            indegree[to_course] += 1
+        # 拓墣排序
+        # 入隊列
+        queue = []
+        l, r = 0, 0
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                queue.append(i)
+                r += 1
+        while l < r:
+            cur = queue.pop()
+            l += 1
+            for n_node in graph[cur]:
+                indegree[n_node] -= 1
+                if indegree[n_node] == 0:
+                    queue.append(n_node)
+                    r += 1
+        # 若拓墣排序後，存在 indegree 大於 0 的點，則代表存在環
+        for i in range(numCourses):
+            if indegree[i] != 0:
+                return False
+        return True
