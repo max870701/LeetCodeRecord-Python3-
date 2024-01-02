@@ -1,4 +1,4 @@
-import heapq
+from heapq import *
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
         # the id starts at 1
@@ -23,12 +23,10 @@ class Solution:
     def dijkstra(self, start:int, graph:List[List[int]]) -> List[int]:
         distTo = [float('inf') for _ in range(len(graph))]
         distTo[start] = 0
-        pq = []
-        #heapq.heappush(pq, (0, State(start, 0)))
-        heapq.heappush(pq, (0, list([start, 0])))
-        while pq:
-            cur_state = heapq.heappop(pq)[1]
-            #cur_node_id, cur_dist_from_start = cur_state.id, cur_state.distFromStart
+        heap = []
+        heappush(heap, (0, list([start, 0])))
+        while heap:
+            cur_state = heappop(heap)[1]
             cur_node_id, cur_dist_from_start = cur_state[0], cur_state[1]
             if distTo[cur_node_id] < cur_dist_from_start:
                 continue
@@ -38,8 +36,7 @@ class Solution:
                 # Update the dp table
                 if dist_to_next_node < distTo[next_node_id]:
                     distTo[next_node_id] = dist_to_next_node
-                    #heapq.heappush(pq, (dist_to_next_node, State(next_node_id, dist_to_next_node)))
-                    heapq.heappush(pq, (dist_to_next_node, list([next_node_id, dist_to_next_node])))
+                    heappush(heap, (dist_to_next_node, list([next_node_id, dist_to_next_node])))
 
         return distTo
 
@@ -49,3 +46,39 @@ class State:
         self.id = id
         # The distance from start point to this node
         self.distFromStart = distFromStart
+
+
+class Solution2:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        # 鄰接表建圖
+        graph = [[] for _ in range(n+1)]
+        for edge in times:
+            from_node, to_node, weight = edge
+            graph[from_node].append([to_node, weight])
+        # 距離數組
+        distance = [float('inf') for _ in range(n+1)]
+        distance[k] = 0
+        # 記錄是否訪問過的數組
+        visited = [False for _ in range(n+1)]
+        # heap
+        heap = []
+        heappush(heap, [0, k]) # [weight, source]
+        # 遍歷
+        while heap:
+            _, cur_node = heappop(heap)
+            if visited[cur_node]: continue
+            visited[cur_node] = True
+            # 考察每一條邊
+            for edge in graph[cur_node]:
+                to_node, weight = edge
+                if not visited[to_node] and distance[cur_node] + weight < distance[to_node]:
+                    distance[to_node] = distance[cur_node] + weight
+                    heappush(heap, [distance[to_node], to_node])
+
+        ans = float('-inf')
+        for i in range(1, n+1):
+            if distance[i] == float('inf'):
+                return -1
+            ans = max(ans, distance[i])
+
+        return ans

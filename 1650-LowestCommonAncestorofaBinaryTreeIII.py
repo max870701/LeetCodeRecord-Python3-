@@ -8,23 +8,20 @@ class Node:
         self.parent = None
 """
 
-class Solution(object):
-    def lowestCommonAncestor(self, p, q):
-        """
-        :type node: Node
-        :rtype: Node
-        """
+class Solution:
+    def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
         # parent 想成 next 指針，題目變為單鏈表相交問題
-        a, b = p, q
-        while a != b:
-            # a 走一步，如果走到根節點，轉到 q 節點
-            if a is None:
-                a = q
+        p1, p2 = p, q
+        while p1 != p2:
+            # p1 走一步，如果走到根節點，轉到 q 節點
+            if p1 is None:
+                p1 = q
             else:
-                a = a.parent
-            # 走一步，如果走到根節點，轉到 p 節點
-            if b is None:
-                b = p
+                p1 = p1.parent
+            # p2 走一步，如果走到根節點，轉到 p 節點
+            if p2 is None:
+                p2 = p
             else:
-                b = b.parent
-        return a
+                p2 = p2.parent
+        
+        return p1

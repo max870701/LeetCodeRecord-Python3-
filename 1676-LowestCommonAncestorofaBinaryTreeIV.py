@@ -1,30 +1,28 @@
 # Definition for a binary tree node.
-# class TreeNode(object):
+# class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
-    def find(self, root, values):
-        if root is None: return None
-        # 前序
-        if root.val in values:
-            return root
-        #
-        left = self.find(root.left, values)
-        right = self.find(root.right, values)
-        # 後序
-        if left and right:
-            return root
-        #
-        return left if left is not None else right
-    def lowestCommonAncestor(self, root, nodes):
-        """
-        :type root: TreeNode
-        :type nodes: List[TreeNode]
-        """
-        values = set()
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', nodes: 'List[TreeNode]') -> 'TreeNode':
+        val_set = set()
         for node in nodes:
-            values.add(node.val)
-        return self.find(root, values)
+            val_set.add(node.val)
+        
+        return self.find(root, val_set)
+    
+    # 給定 root 為根節點的二叉樹，返回 val_set 中所有值的最近公共祖先節點
+    def find(self, root, val_set):
+        if not root: return None
+        # 前序位置
+        if root.val in val_set:
+            return root
+        left = self.find(root.left, val_set)
+        right = self.find(root.right, val_set)
+        # 後序位置
+        if left is not None and right is not None:
+            return root
+
+        return left if left else right
