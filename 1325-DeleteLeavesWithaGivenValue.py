@@ -8,7 +8,7 @@ class Solution:
     # 給定 root 為根節點的二叉樹和 target 值，返回刪除所有葉子節點值為 target 的二叉樹
     def removeLeafNodes(self, root: Optional[TreeNode], target: int) -> Optional[TreeNode]:
         if root is None: return None
-
+        # 改動節點，需要將 root.left 和 root.right 指針重新指向
         root.left = self.removeLeafNodes(root.left, target)
         root.right = self.removeLeafNodes(root.right, target)
         # Post Order ：已知左右子樹的情況後，判斷自身是否符合刪除條件才進行刪除
