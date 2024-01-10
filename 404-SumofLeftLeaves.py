@@ -24,3 +24,22 @@ class Solution:
         self.traverse(root.left)
         self.left = False
         self.traverse(root.right)
+
+
+
+class Solution2:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        self.left = False
+        self.sum = 0
+        self.traverse(root)
+        return self.sum
+    
+    def traverse(self, root):
+        if root is None: return
+        if root.left is None and root.right is None and self.left:
+            self.sum += root.val
+            return
+        self.left = True
+        self.traverse(root.left)
+        self.left = False
+        self.traverse(root.right)
