@@ -33,3 +33,25 @@ class Solution:
             return self.check(head.next, node.left) or self.check(head.next, node.right)
         
         return False
+    
+
+class Solution2:
+    def isSubPath(self, head: Optional[ListNode], root: Optional[TreeNode]) -> bool:
+        if head is None: return True
+        if root is None: return False
+
+        if head.val == root.val:
+            if self.canEmbed(head, root):
+                return True
+            
+        return self.isSubPath(head, root.left) or self.isSubPath(head, root.right)
+    
+    def canEmbed(self, head, root):
+        if head is None: return True
+        if root is None: return False
+
+        if head.val != root.val:
+            return False
+
+        head = head.next
+        return self.canEmbed(head, root.left) or self.canEmbed(head, root.right)
