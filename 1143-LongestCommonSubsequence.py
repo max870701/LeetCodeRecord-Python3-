@@ -35,3 +35,26 @@ class Solution:
         return dp[n][m]
     
 # 嚴格位置依賴 + 空間壓縮
+class Solution3:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        # 決定短邊 -> 節省 dp 使用空間
+        if len(text1) <= len(text2):
+            text1, text2 = text2, text1
+        
+        row, col = len(text1), len(text2)
+   
+        # 建立 dp 數組
+        dp = [0] * (col + 1)
+        # 迭代
+        for len1 in range(1, row+1):
+            leftup = 0
+            for len2 in range(1, col+1):
+                tmp = dp[len2]
+                if text1[len1-1] == text2[len2-1]:
+                    dp[len2] = 1 + leftup
+                else:
+                    dp[len2] = max(dp[len2], dp[len2-1])
+                
+                leftup = tmp
+
+        return dp[len2]
