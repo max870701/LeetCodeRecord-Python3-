@@ -11,3 +11,29 @@ class Solution:
             if s >= target:
                 ans = min(ans, r - l + 1)
         return 0 if ans == float('inf') else ans
+
+
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        # O(n)
+        # 滑動窗口最小長度
+        # 窗口擴張和縮小的條件
+        left = 0
+        right = 0
+        n = len(nums)
+        ans = float('inf')
+        tmp = 0
+        # 窗口滑動條件
+        while right < n:
+            # 擴大窗口
+            tmp += nums[right]
+            right += 1
+            # 縮小窗口
+            while tmp - nums[left] >= target:
+                tmp -= nums[left]
+                left += 1
+            
+            if tmp >= target:
+                ans = min(ans, right - left)
+        
+        return 0 if ans == float('inf') else ans
