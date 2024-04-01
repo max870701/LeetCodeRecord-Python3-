@@ -13,3 +13,19 @@ class Solution(object):
             else:
                 out.append(i)
         return out
+
+class Solution2:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # Sort by the start position
+        intervals.sort(key=lambda pos: pos[0])
+        ans = [intervals[0]]
+
+        # Iterate the intervals array and merge overlapped interval
+        for start, end in intervals[1:]:
+            prev_end = ans[-1][1]
+            if start <= prev_end:
+                ans[-1][1] = max(prev_end, end)
+            else:
+                ans.append([start, end])
+        
+        return ans
