@@ -25,3 +25,27 @@ class Solution:
         ans = self.f(i-1, j, k+1) or self.f(i+1, j, k+1) or self.f(i, j-1, k+1) or self.f(i, j+1, k+1)
         self.board[i][j] = tmp
         return ans
+
+class Solution2:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def find(i: int, j: int, k: int) -> bool:
+            if k == len(word):
+                return True
+            if (i < 0 or i == row or j < 0 or j == col or board[i][j] != word[k]):
+                return False
+            
+            tmp = board[i][j]
+            board[i][j] = "0"
+            ans = find(i+1, j, k+1) or find(i-1, j, k+1) or find(i, j+1, k+1) or find(i, j-1, k+1)
+            board[i][j] = tmp
+
+            return ans
+            
+        # 從每一個點出發尋找
+        row, col = len(board), len(board[0])
+        for i in range(row):
+            for j in range(col):
+                if find(i, j, 0):
+                    return True
+
+        return False

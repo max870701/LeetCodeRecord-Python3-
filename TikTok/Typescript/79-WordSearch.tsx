@@ -18,3 +18,24 @@ function f(board: string[][], i: number, j: number, word: string, k: number): bo
 
     return ans
 };
+
+function exist1(board: string[][], word: string): boolean {
+    const find = (i: number, j: number, k: number) => {
+        if (k === word.length) return true
+        if (i < 0 || i === row || j < 0 || j === col || board[i][j] !== word.charAt(k)) return false
+        let tmp: string = board[i][j]
+        board[i][j] = "0"
+        let ans: boolean = find(i-1, j, k+1) || find(i+1, j, k+1) || find(i, j-1, k+1) || find(i, j+1, k+1)
+        board[i][j] = tmp
+
+        return ans
+    }
+    // Start from all positions to serach the word
+    let row = board.length, col = board[0].length
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+            if (find(i, j, 0)) return true
+        }
+    }
+    return false
+};
