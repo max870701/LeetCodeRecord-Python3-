@@ -41,3 +41,22 @@ class Solution:
             dp_i_1 = max(dp_i_1, -prices[d])
         
         return dp_i_0
+    
+# 雙指針解法
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        left, right = 0, 1
+        maxPf = 0
+
+        while right < len(prices):
+            # Profitable
+            if prices[left] < prices[right]:
+                tmpPf = prices[right] - prices[left]
+                maxPf = max(maxPf, tmpPf)
+            # Find Lower Cost Price
+            else:
+                left = right
+            
+            right += 1
+        
+        return maxPf
