@@ -34,3 +34,54 @@ class Solution(object):
             res[tuple(count)].append(string)
         
         return res.values()
+    
+
+class Solution1:
+    def getFreq(self, s: str) -> List[int]:
+        s_freq = [0] * 26
+        for char in s:
+            pos = ord(char) - ord('a')
+            s_freq[pos] += 1
+        
+        return s_freq
+
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        l = len(strs)
+        if l == 1:
+            return [strs]
+
+        visited_index = set()
+        res = []
+        for i in range(l):
+            if i in visited_index: continue
+            tmp = [strs[i]]
+            for j in range(i+1, l):
+                if j not in visited_index and \
+                self.getFreq(strs[i]) == self.getFreq(strs[j]):
+                    tmp.append(strs[j])
+                    visited_index.add(j)
+            
+            visited_index.add(i)
+            res.append(tmp)
+
+        return res
+    
+
+class Solution2:
+    def getFreq(self, s: str) -> List[int]:
+        s_freq = [0] * 26
+        for char in s:
+            pos = ord(char) - ord('a')
+            s_freq[pos] += 1
+        
+        return s_freq
+
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # Key: freq distribution, Value: list of strings
+        d = defaultdict(list)
+
+        for string in strs:
+            s_freq = self.getFreq(string)
+            d[tuple(s_freq)].append(string)
+
+        return d.values()

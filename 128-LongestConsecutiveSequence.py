@@ -41,12 +41,11 @@ class Solution(object):
         for num in num_set:
             # Ensure the num is not in any middle of streak
             if num - 1 not in num_set:
-                current_num = num
                 current_streak = 1
 
-                while current_num + 1 in num_set:
-                    current_num += 1
+                while num + 1 in num_set:
                     current_streak += 1
+                    num += 1
                 
                 longest_streak = max(longest_streak, current_streak)
 

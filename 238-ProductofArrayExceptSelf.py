@@ -7,11 +7,11 @@ class Solution:
             # Update Prefix
             res[i] = res[i-1] * nums[i-1]
 
-        postfix = 1
+        suffix = 1
         for j in range(l-2, -1, -1):
-            # Update Postfix
-            postfix *= nums[j+1]
+            # Update Suffix
+            suffix *= nums[j+1]
             # Update the result
-            res[j] *= postfix
+            res[j] *= suffix
 
         return res
