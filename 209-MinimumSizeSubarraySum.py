@@ -13,7 +13,7 @@ class Solution:
         return 0 if ans == float('inf') else ans
 
 
-class Solution:
+class Solution1:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
         # O(n)
         # 滑動窗口最小長度
@@ -33,6 +33,7 @@ class Solution:
                 tmp -= nums[left]
                 left += 1
             
+            # 題目要求大於等於 target 的最小子串長度
             if tmp >= target:
                 ans = min(ans, right - left)
         
