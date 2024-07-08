@@ -6,24 +6,51 @@ class ListNode:
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        ans, cur = None, None
-        carry = 0
-        while l1 or l2:
-            s = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
-            val = s % 10
-            carry = s // 10
-            
-            if ans is None:
-                ans = ListNode(val=val)
-                cur = ans
-            else:
-                cur.next = ListNode(val=val)
-                cur = cur.next
+        p = dummy = ListNode()
+        p1 = l1
+        p2 = l2
+        carry = 0 # 進位
 
-            l1 = None if l1 is None else l1.next
-            l2 = None if l2 is None else l2.next
+        while p1 or p2 or carry:
+            p1_val = p1.val if p1 else 0
+            p2_val = p2.val if p2 else 0
+            val = p1_val + p2_val + carry
+            carry = val // 10
+            val %= 10
 
-        if carry == 1:
-            cur.next = ListNode(val=1)
+            p.next = ListNode(val=val)
+            p = p.next
+            p1 = p1.next if p1 else None
+            p2 = p2.next if p2 else None
+
+        return dummy.next
+
+class Solution2:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        return self.convertToList(self.convertToNumber(l1) + self.convertToNumber(l2))
+    
+    def convertToList(self, num):
+        multi = 10
+        p = dummy = ListNode()
+        if num == 0: return dummy
+
+        while num > 0:
+            cur_val = num % multi
+            num //= multi
+            p.next = ListNode(cur_val)
+            p = p.next
+
+        return dummy.next
+
+    def convertToNumber(self, head):
+        p = head
+        multi = 1
+        res = 0
+
+        while p:
+            cur_val = p.val
+            res += (cur_val * multi)
+            multi *= 10
+            p = p.next
         
-        return ans
+        return res
