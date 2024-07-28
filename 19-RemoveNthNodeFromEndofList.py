@@ -23,3 +23,23 @@ class Solution(object):
         while p1 is not None:
             p1, p2 = p1.next, p2.next
         return p2
+
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        if head.next is None: return None
+
+        fast = slow = head
+
+        for _ in range(n):
+            fast = fast.next
+        
+        if fast is None:
+            return head.next
+
+        while fast.next is not None:
+            fast = fast.next
+            slow = slow.next
+
+        slow.next = slow.next.next
+
+        return head
