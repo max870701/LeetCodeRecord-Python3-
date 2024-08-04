@@ -19,3 +19,22 @@ class Solution:
         pathMax = max(pathMax, root.val)
         self.traverse(root.left, pathMax)
         self.traverse(root.right, pathMax)
+
+
+class Solution1:
+    def goodNodes(self, root: TreeNode) -> int:
+        self.count = 0
+        self.traverse(root, root.val)
+
+        return self.count
+
+    def traverse(self, node, parent_max):
+
+        if node.val >= parent_max:
+            self.count += 1
+            parent_max = node.val
+        
+        if node.left:
+            self.traverse(node.left, parent_max)
+        if node.right:
+            self.traverse(node.right, parent_max)

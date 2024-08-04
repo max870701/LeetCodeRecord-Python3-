@@ -23,3 +23,30 @@ class Solution:
                     q.put(node.left)
         
         return res
+
+class Solution1:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if root is None: return []
+        res = []
+        q = Queue()
+        q.put(root)
+
+        while not q.empty():
+            cur_qsize = q.qsize()
+            right_node = None
+
+            for _ in range(cur_qsize):
+                cur_node = q.get()
+
+                if cur_node:
+                    right_node = cur_node
+
+                if cur_node.left:
+                    q.put(cur_node.left)
+                
+                if cur_node.right:
+                    q.put(cur_node.right)
+
+            res.append(right_node.val)
+        
+        return res

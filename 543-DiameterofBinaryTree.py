@@ -22,3 +22,29 @@ class Solution:
         self.maxDiameter = max(self.maxDiameter, d)
 
         return max(left_max, right_max) + 1
+    
+
+class Solution1:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        """
+        Given root node, return maximum depth.
+        """
+        if root is None: return 0
+
+        left_max_depth = self.maxDepth(root.left)
+        right_max_depth = self.maxDepth(root.right)
+
+        self.maxDiameter = max(
+            left_max_depth + right_max_depth,
+            self.maxDiameter
+        )
+
+        return 1 + max(left_max_depth, right_max_depth)
+
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        """
+        Given root node, return the diameter of binary Tree
+        """
+        self.maxDiameter = 0
+        self.maxDepth(root)
+        return self.maxDiameter

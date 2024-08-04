@@ -53,3 +53,30 @@ class Solution2:
             return False
 
         return self.isSameTree(root1.left, root2.left) and self.isSameTree(root1.right, root2.right)
+    
+
+class Solution3:
+    def isSameTree(self, p, q):
+        if p is None and q is None:
+            return True
+        elif p is None or q is None:
+            return False
+
+        if p.val != q.val:
+            return False
+        
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        """
+        Give a root node and a subRoot node, return if the subRoot in the root.
+        """
+        # subRoot is left subtree (sameTree)
+        # subRoot is right subtree (sameTree)
+        if self.isSameTree(root, subRoot):
+            return True
+        
+        left_res = self.isSubtree(root.left, subRoot) if root.left else False
+        right_res = self.isSubtree(root.right, subRoot) if root.right else False
+
+        return left_res or right_res

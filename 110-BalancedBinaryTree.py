@@ -23,3 +23,29 @@ class Solution:
             self.balanced = False
         
         return res + 1
+    
+class Solution1:
+    def maxHeight(self, root) -> int:
+        """
+        Given a root node, return the maximum height of the tree
+        """
+        if root is None: return 0
+        
+        left_max = self.maxHeight(root.left)
+        right_max = self.maxHeight(root.right)
+
+        if abs(left_max - right_max) > 1:
+            self.res = False
+
+        return max(
+            left_max,
+            right_max
+        ) + 1
+
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        """
+        Given root node, return if this tree is balanced.
+        """
+        self.res = True
+        self.maxHeight(root)
+        return self.res

@@ -15,3 +15,21 @@ class Solution:
         if p.val != q.val: return False
         
         return (self.isSameTree(p.left, q.left)) and (self.isSameTree(p.right, q.right))
+
+class Solution1:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        """
+        Given p, q two root node, return if they are the same tree.
+        """
+        # Base case
+        if p is None and q is None:
+            return True
+        elif p is None or q is None:
+            return False
+
+        # The same tree condition 1: p.val == q.val
+        if p.val != q.val:
+            return False
+        
+        # The same tree condition 2: (p.left and q.left is the same tree) and (p.right and q.right is the same tree)
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)

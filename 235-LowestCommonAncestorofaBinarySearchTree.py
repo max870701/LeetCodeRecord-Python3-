@@ -6,7 +6,7 @@
 #         self.right = None
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         val1 = max(p.val, q.val)
         val2 = min(p.val, q.val)
         
@@ -25,3 +25,21 @@ class Solution:
             return self.find(root.right, val1, val2)
         # val1 <= root.val <= val2，則當前節點為 LAC
         return root
+    
+class Solution1:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        """
+        Given a root node, p node, q node, return the lowest common ancestor of p, q nodes.
+        """
+        # Binary Search Tree (BST) where all node values are unique
+        if p.val == root.val:
+            return p
+        elif q.val == root.val:
+            return q
+
+        if p.val < root.val and q.val < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
